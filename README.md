@@ -1,5 +1,7 @@
 # AI DML
 
+Before any setup or package-install command, complete the [TLS installer remediation prerequisites](docs/security/emudhra-2026-10.md) for every active and inactive environment and package manager. The guide covers secure bootstrap ordering, distribution-managed Python and installation-specific uv updates.
+
 ## Summary
 This repository helps you write and format SQL. Actually, it enables proactive data model design and development in situations where real data is not available. The models can work with and extract the appropriate information to build your SQL.
 
