@@ -12,7 +12,9 @@ The pip bootstrap below requires Python >=3.10. For an older interpreter, stop u
 python -m pip install --upgrade --no-deps 'https://files.pythonhosted.org/packages/3f/06/3e4420302363fbb71be3c7f35ce042f54bfca330e3e66b3a2e3c4cca579f/pip-26.2.2-py3-none-any.whl#sha256=fd7f4dfa8190e014013b9f08f3e973f4e4c26ffd179a204895533a7254813a70'
 ```
 
-After bootstrapping pip, upgrade any installed uv with `python -m pip install --upgrade 'uv>=0.13.4'`; check `python -m pip --version` and every `uv --version` on PATH. Recheck newly created environments because ensurepip may seed an older pip.
+After bootstrapping pip, check `python -m pip --version` in every environment. If uv was installed by that Python's pip, update that copy with `python -m pip install --upgrade 'uv>=0.13.4'`. This does not update standalone, pipx, Homebrew or Cargo installations: update each through its owning installation method using a trusted channel and verified artifact integrity, or retire it. Do not bootstrap a replacement through an unpatched installer's unverified network download.
+
+Inventory all uv executables (`type -a uv` on POSIX shells or `where uv` on Windows), check each absolute executable path with `--version`, and remove or retire every copy below 0.13.4. Installing a second pip-managed copy does not prove the active PATH copy was upgraded. Follow [uv's installation-method guidance](https://docs.astral.sh/uv/getting-started/installation/#upgrading-uv). Recheck newly created Python environments because ensurepip may seed an older pip.
 
 Recreate or update environments, rebuild images, restart processes, and verify the installed bundle before treating a running deployment as remediated. This PR does not deploy anything. Inspect OS trust and any SSL_CERT_FILE, SSL_CERT_DIR, REQUESTS_CA_BUNDLE, or custom TLS context independently; repository changes cannot prove deployed settings. Unused or future clients that choose their own CA bundles need their own verification.
 
